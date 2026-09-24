@@ -1,4 +1,44 @@
-@import 'tailwindcss';
+@import "tailwindcss";
+
+:root {
+  font-family: Inter, "Segoe UI", sans-serif;
+  color: #2d2b33;
+  background: #f3eef9;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: #f3eef9;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(193, 177, 238, 0.18),
+      rgba(255, 255, 255, 0) 25%
+    ),
+    #f3eef9;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+#root {
+  min-height: 100vh;
+}
 
 ::-webkit-scrollbar {
   width: 8px;
@@ -9,10 +49,16 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #d8c9ef;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #b9a9df;
+}
+
+@media (max-width: 880px) {
+  .sidebar-stack {
+    display: block;
+  }
 }

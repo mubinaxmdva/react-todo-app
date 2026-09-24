@@ -1,0 +1,28 @@
+<svg
+  width="120"
+  height="120"
+  viewBox="0 0 512 512"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <!-- Background -->
+  <rect
+    x="28"
+    y="28"
+    width="456"
+    height="456"
+    rx="115"
+    fill="#E0CAFF"
+  />
+
+  <!-- N logo -->
+  <path
+    d="M145 355V157H195L317 290V157H367V355H317L195 222V355H145Z"
+    fill="white"
+  />
+
+  <!-- Star -->
+  <path
+    d="M385 92L394 115L418 124L394 133L385 157L376 133L352 124L376 115L385 92Z"
+    fill="#7A4DBF"
+  />
+</svg>

@@ -1,36 +1,49 @@
+import { useContext, useState } from "react";
 import { FaPlus, FaTimes } from "react-icons/fa";
-import React, { useState, useContext } from "react";
 import { TodoContext } from "../contexts/TodoContext";
+
+const initialForm = {
+  title: "",
+  description: "",
+  priority: "High",
+  category: "Study",
+};
 
 const AddTodoModal = ({ close }) => {
   const { dispatch } = useContext(TodoContext);
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [priority, setPriority] = useState("High");
-  const [category, setCategory] = useState("Study");
+  const [formData, setFormData] = useState(initialForm);
 
-  const handleAdd = () => {
-    if (!title.trim()) return alert("Please enter a task name");
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
-    const task = {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const title = formData.title.trim();
+    if (!title) return;
+
+    const newTask = {
       id: Date.now(),
-      title: title.trim(),
-      description: description.trim(),
-      priority,
-      category,
+      title,
+      description: formData.description.trim(),
+      priority: formData.priority,
+      category: formData.category,
+      completed: false,
     };
 
-    dispatch({ type: "ADD_TASK", payload: task });
-    // reset and close
-    setTitle("");
-    setDescription("");
+    dispatch({ type: "ADD_TASK", payload: newTask });
+    setFormData(initialForm);
     close();
   };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4 backdrop-blur-sm">
-      <div className=" w-full max-w-xl overflow-y-auto rounded-3xl bg-white p-5 shadow-2xl sm:p-6 lg:p-8">
-        {/* Header */}
+      <form
+        onSubmit={handleSubmit}
+        className="w-full max-w-xl overflow-y-auto rounded-3xl bg-white p-5 shadow-2xl sm:p-6 lg:p-8"
+      >
         <div className="mb-6 flex items-start justify-between">
           <div>
             <h2 className="text-xl font-bold text-slate-800 sm:text-2xl">
@@ -43,6 +56,7 @@ const AddTodoModal = ({ close }) => {
           </div>
 
           <button
+            type="button"
             onClick={close}
             className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-100 transition hover:bg-red-100 hover:text-red-600"
           >
@@ -50,17 +64,17 @@ const AddTodoModal = ({ close }) => {
           </button>
         </div>
 
-        {/* Form */}
-        <div className="max-h-[50vh] overflow-y-auto pr-2">
+        <div className="max-h-[50vh] space-y-5 overflow-y-auto pr-2">
           <div>
             <label className="mb-2 block text-sm font-medium text-slate-700">
               Task Name
             </label>
 
             <input
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
               type="text"
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
               placeholder="Enter task..."
               className="w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none transition focus:border-indigo-500"
             />
@@ -72,15 +86,15 @@ const AddTodoModal = ({ close }) => {
             </label>
 
             <textarea
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
               rows="4"
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
               placeholder="Write something..."
               className="w-full resize-none rounded-2xl border border-slate-300 px-4 py-3 outline-none transition focus:border-indigo-500"
             />
           </div>
 
-          {/* Responsive Grid */}
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             <div>
               <label className="mb-2 block text-sm font-medium text-slate-700">
@@ -88,8 +102,9 @@ const AddTodoModal = ({ close }) => {
               </label>
 
               <select
-                value={priority}
-                onChange={(e) => setPriority(e.target.value)}
+                name="priority"
+                value={formData.priority}
+                onChange={handleChange}
                 className="w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none focus:border-indigo-500"
               >
                 <option>High</option>
@@ -104,8 +119,9 @@ const AddTodoModal = ({ close }) => {
               </label>
 
               <select
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
+                name="category"
+                value={formData.category}
+                onChange={handleChange}
                 className="w-full rounded-2xl border border-slate-300 px-4 py-3 outline-none focus:border-indigo-500"
               >
                 <option>Study</option>
@@ -117,9 +133,9 @@ const AddTodoModal = ({ close }) => {
           </div>
         </div>
 
-        {/* Footer */}
         <div className="mt-8 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
           <button
+            type="button"
             onClick={close}
             className="w-full rounded-xl border border-slate-300 px-5 py-3 font-medium text-slate-700 transition hover:bg-slate-100 sm:w-auto"
           >
@@ -127,14 +143,14 @@ const AddTodoModal = ({ close }) => {
           </button>
 
           <button
-            onClick={handleAdd}
+            type="submit"
             className="flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 font-medium text-white transition hover:bg-indigo-700 sm:w-auto"
           >
             <FaPlus />
             Add Task
           </button>
         </div>
-      </div>
+      </form>
     </div>
   );
 };
