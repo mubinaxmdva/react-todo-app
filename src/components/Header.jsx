@@ -49,7 +49,7 @@ function Header() {
             Productivity
           </p>
           <h1 className="text-[2rem] font-semibold leading-none tracking-[-0.06em] text-[#171827]">
-            Nova
+            Todo
           </h1>
         </div>
       </div>

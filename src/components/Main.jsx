@@ -1071,7 +1071,7 @@ function AboutPage() {
           About
         </h2>
         <p className="mt-4 text-base leading-7 text-[#5f5c70]">
-          Nova is a lightweight productivity dashboard for organizing tasks,
+          Todo app is a lightweight productivity dashboard for organizing tasks,
           planning the day, and protecting focus time. The app keeps a single
           source of truth for task data while making it easy to track progress,
           complete work, and stay consistent.
