@@ -1,28 +1,24 @@
 <svg
-  width="120"
-  height="120"
-  viewBox="0 0 512 512"
+  width="40"
+  height="40"
+  viewBox="0 0 40 40"
   xmlns="http://www.w3.org/2000/svg"
 >
-  <!-- Background -->
   <rect
-    x="28"
-    y="28"
-    width="456"
-    height="456"
-    rx="115"
-    fill="#E0CAFF"
+    width="40"
+    height="40"
+    rx="16"
+    fill="#6c55e8"
   />
 
-  <!-- N logo -->
-  <path
-    d="M145 355V157H195L317 290V157H367V355H317L195 222V355H145Z"
-    fill="white"
-  />
-
-  <!-- Star -->
-  <path
-    d="M385 92L394 115L418 124L394 133L385 157L376 133L352 124L376 115L385 92Z"
-    fill="#7A4DBF"
-  />
+  <g transform="translate(12 12)">
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 512 512"
+      fill="white"
+    >
+      <path d="M464 128H48C21.5 128 0 149.5 0 176v160c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48V176c0-26.5-21.5-48-48-48zM48 160h416c8.8 0 16 7.2 16 16v32h-96c-17.7 0-32 14.3-32 32v16H160v-16c0-17.7-14.3-32-32-32H32v-32c0-8.8 7.2-16 16-16zm416 192H48c-8.8 0-16-7.2-16-16v-96h96v16c0 17.7 14.3 32 32 32h192c17.7 0 32-14.3 32-32v-16h96v96c0 8.8-7.2-16-16-16z"/>
+    </svg>
+  </g>
 </svg>
