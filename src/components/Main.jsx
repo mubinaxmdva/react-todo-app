@@ -6,7 +6,6 @@ import TodoCard from "./TodoCard";
 import AlarmList from "./AlarmList";
 import Timer from "./Timer";
 import Stopwatch from "./Stopwatch";
-import ClockPage from "./ClockPage";
 
 const filters = [
   { key: "all", label: "All" },
@@ -1236,7 +1235,6 @@ function Main() {
       <Route path="/calendar" element={<CalendarPage />} />
       <Route path="/focus" element={<FocusPage />} />
       <Route path="/alarms" element={<AlarmList />} />
-      <Route path="/clock" element={<ClockPage />} />
       <Route path="/timer" element={<Timer />} />
       <Route path="/stopwatch" element={<Stopwatch />} />
       <Route path="/statistics" element={<StatisticsPage />} />

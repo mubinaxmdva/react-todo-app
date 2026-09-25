@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Header from "./components/Header";
 import Main from "./components/Main";
@@ -187,12 +187,74 @@ function App() {
     state.settings,
   ]);
 
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const hideMobileHeader = location.pathname === "/clock";
+
+  useEffect(() => {
+    // close mobile menu when navigating to a page that hides header
+    if (hideMobileHeader && mobileMenuOpen) setMobileMenuOpen(false);
+  }, [hideMobileHeader, mobileMenuOpen]);
+
   return (
     <div className="min-h-screen bg-[#f5f3fb] px-4 py-6 md:px-8 xl:px-10">
       <div className="mx-auto flex max-w-[1180px] overflow-hidden rounded-[32px] border border-[#ece4f8] bg-[#fffdfd] shadow-[0_24px_60px_rgba(108,92,160,0.12)]">
-        <Header />
+        {/* Desktop sidebar — hidden on small screens */}
+        <div className="hidden md:block">
+          <Header
+            onNavigate={() => {
+              if (mobileMenuOpen) setMobileMenuOpen(false);
+            }}
+          />
+        </div>
+
         <Main />
+
         <ActiveAlarmOverlay />
+
+        {/* Mobile menu button (visible only on small screens) */}
+        {!hideMobileHeader && (
+          <button
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+            onClick={() => setMobileMenuOpen((s) => !s)}
+            className="md:hidden fixed left-4 top-4 z-60 inline-flex items-center justify-center h-10 w-10 rounded-lg bg-white/95 text-[#4f4b5d] shadow-sm">
+            {mobileMenuOpen ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                fill="currentColor">
+                <path d="M18.3 5.71a1 1 0 0 0-1.41 0L12 10.59 7.11 5.7A1 1 0 0 0 5.7 7.11L10.59 12l-4.89 4.89a1 1 0 1 0 1.41 1.41L12 13.41l4.89 4.89a1 1 0 0 0 1.41-1.41L13.41 12l4.89-4.89a1 1 0 0 0 0-1.4z" />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                fill="currentColor">
+                <path d="M3 6h18v2H3zM3 11h18v2H3zM3 16h18v2H3z" />
+              </svg>
+            )}
+          </button>
+        )}
+
+        {/* Mobile sidebar overlay/drawer */}
+        {!hideMobileHeader && mobileMenuOpen && (
+          <div className="md:hidden">
+            <div
+              className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm transition-opacity duration-200"
+              onClick={() => setMobileMenuOpen(false)}
+            />
+            <div
+              className="fixed left-0 top-0 z-60 h-full w-80 max-w-[85%] transform transition-transform duration-300"
+              style={{ boxShadow: "0 24px 60px rgba(108,92,160,0.12)" }}>
+              <div className="h-full overflow-auto bg-[#fbfbfe]">
+                <Header onNavigate={() => setMobileMenuOpen(false)} />
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

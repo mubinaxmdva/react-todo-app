@@ -14,7 +14,7 @@ import {
 } from "react-icons/fa";
 import { TodoContext } from "../contexts/TodoContext";
 
-function Header() {
+function Header({ onNavigate }) {
   const { state } = useContext(TodoContext);
   const tasks = Array.isArray(state.todos) ? state.todos : [];
   const completed = tasks.filter((todo) => todo.completed).length;
@@ -34,7 +34,6 @@ function Header() {
   const secondaryLinks = [
     { to: "/about", label: "About", icon: FaInfoCircle },
     { to: "/settings", label: "Settings", icon: FaCog },
-    { to: "/clock", label: "Clock", icon: FaClock },
   ];
 
   return (
@@ -60,6 +59,7 @@ function Header() {
             key={label}
             to={to}
             end={to === "/"}
+            onClick={() => onNavigate && onNavigate()}
             className={({ isActive }) =>
               `flex w-full items-center justify-between rounded-2xl px-3 py-3 text-left transition ${
                 isActive
@@ -110,7 +110,9 @@ function Header() {
         </div>
       </div>
 
-      <div className="mt-8 space-y-2 border-t border-[#ece7f7] pt-5">
+      <div
+        onClick={() => onNavigate && onNavigate()}
+        className="mt-8 space-y-2 border-t border-[#ece7f7] pt-5">
         {secondaryLinks.map(({ to, label, icon: Icon }) => (
           <NavLink
             key={label}

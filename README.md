@@ -2,6 +2,11 @@
 
 A responsive task management application built with React to practice state management, CRUD functionality, and reusable component development.
 
+## 🚀 Demo
+
+https://react-todo-app-1.netlify.app/
+
+
 ## ✨ Features
 
 * Add new tasks
